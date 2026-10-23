@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Belajar Kelas 5A - SD Negeri 13 Pedungan</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 10px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 20px 15px; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header h1 { margin: 0; font-size: 22px; }
+        .header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
+        .login-section, .dashboard, .teacher-dashboard { background: white; padding: 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 15px; }
+        .hidden { display: none !important; }
+        select, input, button, textarea { padding: 12px; margin: 6px 0; width: 100%; font-size: 15px; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; }
+        button { background-color: #4CAF50; color: white; border: none; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:active { transform: scale(0.98); }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 15px; }
+        .menu-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px 8px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .menu-card:active { background: #e3f2fd; }
+        .menu-card h3 { margin: 6px 0 2px 0; color: #2c3e50; font-size: 15px; }
+        .menu-card p { margin: 0; font-size: 11px; color: #666; }
+        .tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
+        .tab { flex: 1; text-align: center; padding: 10px 12px; background: #eee; cursor: pointer; border-radius: 6px; font-weight: bold; font-size: 13px; white-space: nowrap; }
+        .tab.active { background: #2196f3; color: white; }
+        .content-section { display: none; background: #fafafa; padding: 12px; border: 1px solid #eee; border-radius: 8px; }
+        .content-section.active { display: block; }
+        .form-group { margin-bottom: 12px; text-align: left; }
+        .form-group label { font-size: 13px; font-weight: bold; display: block; margin-bottom: 4px; }
+        .question-box { background: white; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; }
+        .option-label { display: block; margin: 8px 0; font-weight: normal; font-size: 14px; }
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #2196f3; color: white; }
+        .img-preview { max-width: 100%; height: auto; border-radius: 8px; margin-top: 8px; border: 1px solid #ddd; }
+        .subject-card { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 12px; margin-bottom: 10px; border-radius: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ruang Belajar Kelas 5A</h1>
+            <p>SD Negeri 13 Pedungan</p>
+        </div>
+
+        <!-- LOGIN SECTION -->
+        <div id="login-section" class="login-section">
+            <h2 style="margin-top:0; font-size:18px;">Masuk ke Ruang Belajar</h2>
+            <div class="tabs">
+                <div class="tab active" onclick="switchLogin(this, 'siswa')">Masuk Siswa</div>
+                <div class="tab" onclick="switchLogin(this, 'guru')">Masuk Guru</div>
+            </div>
+            
+            <div id="form-siswa">
+                <label style="font-size:13px; font-weight:bold;">Pilih Nama Kamu:</label>
+                <select id="student-name">
+                    <option value="">-- Pilih Nama Lengkap --</option>
+                    <option value="DESAK PUTU GEBY WIJAYANI">DESAK PUTU GEBY WIJAYANI</option>
+                    <option value="FIRLIAN BIMANTARA">FIRLIAN BIMANTARA</option>
+                    <option value="I GEDE ANGGA SUNIADARMA PUTRA">I GEDE ANGGA SUNIADARMA PUTRA</option>
+                    <option value="I KETUT ARIK WIDIANA">I KETUT ARIK WIDIANA</option>
+                    <option value="I KOMANG JUNA WIRA SAPUTRA">I KOMANG JUNA WIRA SAPUTRA</option>
+                    <option value="I KOMANG RIZKY ADITYA">I KOMANG RIZKY ADITYA</option>
+                    <option value="I KOMANG SACHIO KAMESWARA">I KOMANG SACHIO KAMESWARA</option>
+                    <option value="I MADE AFREEN AGASTYA JULIANDINATHA">I MADE AFREEN AGASTYA JULIANDINATHA</option>
+                    <option value="I PUTU ARTHA WIGUNA">I PUTU ARTHA WIGUNA</option>
+                    <option value="I PUTU BAGUS ARYA PRADIPTA">I PUTU BAGUS ARYA PRADIPTA</option>
+                    <option value="I WAYAN DEVANDRA DIKSHAN NALADHIPA">I WAYAN DEVANDRA DIKSHAN NALADHIPA</option>
+                    <option value="KADEK INDRA HADI PUTRA">KADEK INDRA HADI PUTRA</option>
+                    <option value="KADEK LAURA AISHWARYA SURYA AGATA">KADEK LAURA AISHWARYA SURYA AGATA</option>
+                    <option value="I MADE BAGUS SEMARA GUNA">I MADE BAGUS SEMARA GUNA</option>
+                    <option value="KETUT NANDA APRILIANA SAPUTRI">KETUT NANDA APRILIANA SAPUTRI</option>
+                    <option value="KOMANG DITA DAMAYANTI">KOMANG DITA DAMAYANTI</option>
+                    <option value="MADE CHANDRA ADI GUNA">MADE CHANDRA ADI GUNA</option>
+                    <option value="MARIA FRANSISKA LAPE">MARIA FRANSISKA LAPE</option>
+                    <option value="MUHAMMAD ASBHI ELOK SAPUTRA">MUHAMMAD ASBHI ELOK SAPUTRA</option>
+                    <option value="NABILA DISTA ANGGRAINI">NABILA DISTA ANGGRAINI</option>
+                    <option value="NI KADEK KEISYA MAORA PUTRI">NI KADEK KEISYA MAORA PUTRI</option>
+                    <option value="NI KADEK MASHYA RADINA HAYU">NI KADEK MASHYA RADINA HAYU</option>
+                    <option value="NI KETUT KAMANIKA PADMA ISHWARI">NI KETUT KAMANIKA PADMA ISHWARI</option>
+                    <option value="NI LUH DHEA CALISTA PUTRI">NI LUH DHEA CALISTA PUTRI</option>
+                    <option value="NI PUTU KIRANA MAHARANI PUTRI">NI PUTU KIRANA MAHARANI PUTRI</option>
+                    <option value="NI PUTU SINTA RADHA VIDYA">NI PUTU SINTA RADHA VIDYA</option>
+                    <option value="NI WAYAN TISNA PRAMESTI SWARY">NI WAYAN TISNA PRAMESTI SWARY</option>
+                    <option value="PUTU AYU LIDYA DINATA">PUTU AYU LIDYA DINATA</option>
+                    <option value="PUTU DESTA ARYASATYA NARENDRA">PUTU DESTA ARYASATYA NARENDRA</option>
+                    <option value="PUTU DIVYA NANDA DWI PUTRI">PUTU DIVYA NANDA DWI PUTRI</option>
+                    <option value="RAMADHAN AZKA MUMTAZ">RAMADHAN AZKA MUMTAZ</option>
+                    <option value="ZAVRINA QIANDRA ALMAHYRA PRAYATA">ZAVRINA QIANDRA ALMAHYRA PRAYATA</option>
+                    <option value="I KOMANG GEDE ANDILAN PRATISTA P.">I KOMANG GEDE ANDILAN PRATISTA P.</option>
+                </select>
+                <label style="font-size:13px; font-weight:bold;">Kode PIN Siswa:</label>
+                <input type="password" id="student-pin" placeholder="Masukkan 4 angka PIN Siswa">
+                <button onclick="loginSiswa()">Mulai Belajar</button>
+            </div>
+
+            <div id="form-guru" class="hidden">
+                <label style="font-size:13px; font-weight:bold;">PIN Rahasia Guru:</label>
+                <input type="password" id="pin-guru" placeholder="Masukkan PIN Rahasia Guru">
+                <button onclick="loginGuru()">Masuk sebagai Guru</button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD SISWA -->
+        <div id="student-dashboard" class="dashboard hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 id="welcome-siswa" style="margin:0; font-size:16px; color:#2E7D32;">Selamat Datang!</h3>
+                <button onclick="logout()" style="background-color: #f44336; width: auto; padding: 6px 12px; font-size:12px;">Keluar</button>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card" onclick="showSection('subject-list')">
+                    <h3>📚 Mapel</h3>
+                    <p>Materi & Tugas</p>
+                </div>
+                <div class="menu-card" onclick="showSection('section-nilai-siswa')">
+                    <h3>📊 Nilai</h3>
+                    <p>Sumatif Semester</p>
+                </div>
+                <div class="menu-card" onclick="showSection('section-absensi')">
+                    <h3>✋ Absen</h3>
+                    <p>Hadir Hari Ini</p>
+                </div>
+                <div class="menu-card" onclick="showSection('section-jadwal')">
+                    <h3>📅 Jadwal</h3>
+                    <p>Jadwal Seminggu</p>
+                </div>
+                <div class="menu-card" onclick="showSection('section-pengumuman')">
+                    <h3>📢 Info</h3>
+                    <p>Pengumuman</p>
+                </div>
+            </div>
+
+            <div id="subject-list" class="main-section"></div>
+            
+            <div id="subject-detail" class="main-section hidden">
+                <button onclick="backToSubjects()" style="background-color: #607d8b; width: auto; padding: 6px 12px; font-size:12px; margin-bottom: 10px;">&larr; Kembali ke Mapel</button>
+                <h3 id="detail-title" style="color: #2196f3; font-size: 18px; margin-top:0; border-bottom: 2px solid #2196f3; padding-bottom: 6px;">Nama Mapel</h3>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="switchDetailTab(this, 'materi')">Materi</div>
+                    <div class="tab" onclick="switchDetailTab(this, 'soal')">Kuis PG</div>
+                    <div class="tab" onclick="switchDetailTab(this, 'tugas')">Kumpul Tugas</div>
+                </div>
+                
+                <div id="content-materi" class="content-section active"></div>
+                <div id="content-soal" class="content-section"><div id="kuis-container"></div></div>
+                <div id="content-tugas" class="content-section"></div>
+            </div>
+
+            <div id="section-nilai-siswa" class="main-section hidden">
+                <h3 style="margin-top:0;">Transkrip Nilai Sumatif</h3>
+                <div id="display-nilai-sumatif" class="table-responsive"></div>
+            </div>
+
+            <div id="section-absensi" class="main-section hidden">
+                <h3 style="margin-top:0;">Absensi Harian Siswa</h3>
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0;">
+                    <p id="absensi-status-text" style="font-size:14px;">Silakan klik tombol di bawah untuk mengisi kehadiran Anda hari ini.</p>
+                    <button id="btn-isi-absen" onclick="kirimAbsensi()" style="background-color: #4CAF50;">Hadir Hari Ini</button>
+                </div>
+            </div>
+
+            <div id="section-jadwal" class="main-section hidden">
+                <h3 style="margin-top:0;">Jadwal Pelajaran Kelas 5A</h3>
+                <div id="display-jadwal" class="table-responsive"></div>
+            </div>
+
+            <div id="section-pengumuman" class="main-section hidden">
+                <h3 style="margin-top:0;">Pengumuman Kelas 5A</h3>
+                <div id="display-pengumuman"></div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD GURU -->
+        <div id="teacher-dashboard" class="teacher-dashboard hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="margin:0; font-size:16px; color:#9C27B0;">Panel Guru Kelas 5A</h3>
+                <button onclick="logout()" style="background-color: #f44336; width: auto; padding: 6px 12px; font-size:12px;">Keluar</button>
+            </div>
+
+            <!-- FORM INPUT NILAI SUMATIF GURU -->
+            <div class="subject-card" style="background: #fff; border: 1px solid #ddd; border-left: 4px solid #e91e63;">
+                <h4 style="color:#e91e63; margin-top:0;">1. Input Nilai Sumatif Siswa</h4>
+                <div class="form-group">
+                    <label>Pilih Siswa:</label>
+                    <select id="admin-nilai-siswa-select"></select>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Ujian:</label>
+                    <select id="admin-nilai-jenis">
+                        <option value="STS1">STS-1 (Tengah Semester 1)</option>
+                        <option value="SAS1">SAS-1 (Akhir Semester 1)</option>
+                        <option value="STS2">STS-2 (Tengah Semester 2)</option>
+                        <option value="SAT">SAT (Akhir Tahun)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mata Pelajaran:</label>
+                    <select id="admin-nilai-mapel">
+                        <option>Bahasa Indonesia</option>
+                        <option>Pendidikan Pancasila</option>
+                        <option>Matematika</option>
+                        <option>IPAS</option>
+                        <option>Seni Rupa</option>
+                        <option>Koding Kecerdasan Artifisial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nilai (0 - 100):</label>
+                    <input type="number" id="admin-nilai-angka" placeholder="Contoh: 88">
+                </div>
+                <button onclick="simpanNilaiSumatif()" style="background-color: #e91e63;">Simpan & Terbitkan Nilai</button>
+            </div>
+
+            <!-- FORM BUAT MATERI DENGAN GAMBAR -->
+            <div class="subject-card" style="background: #fff; border: 1px solid #ddd; border-left: 4px solid #ff9800;">
+                <h4 style="color:#e65100; margin-top:0;">2. Terbitkan Materi / Tugas (Foto)</h4>
+                <div class="form-group">
+                    <label>Mata Pelajaran:</label>
+                    <select id="admin-mapel">
+                        <option>Bahasa Indonesia</option>
+                        <option>Pendidikan Pancasila</option>
+                        <option>Matematika</option>
+                        <option>IPAS</option>
+                        <option>Seni Rupa</option>
+                        <option>Koding Kecerdasan Artifisial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Konten:</label>
+                    <select id="admin-jenis">
+                        <option value="Materi">Materi Baru</option>
+                        <option value="Tugas">Tugas Harian Baru</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Isi Teks Materi / Tugas:</label>
+                    <textarea id="admin-isi" rows="3" placeholder="Ketik materi atau instruksi di sini..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Unggah Gambar (Opsional):</label>
+                    <input type="file" id="admin-file-gambar" accept="image/*">
+                </div>
+                <button onclick="simpanKontenGuru()" style="background-color: #ff9800;">Terbitkan Konten</button>
+            </div>
+
+            <div class="subject-card" style="background: #fff; border: 1px solid #ddd; border-left: 4px solid #009688;">
+                <h4 style="color:#009688; margin-top:0;">3. Update Jadwal Pelajaran</h4>
+                <div class="form-group"><label>Senin:</label><input type="text" id="jadwal-senin" placeholder="Upacara, B.Indo"></div>
+                <div class="form-group"><label>Selasa:</label><input type="text" id="jadwal-selasa" placeholder="Matematika, IPAS"></div>
+                <div class="form-group"><label>Rabu:</label><input type="text" id="jadwal-rabu" placeholder="Seni Rupa, Koding AI"></div>
+                <div class="form-group"><label>Kamis:</label><input type="text" id="jadwal-kamis" placeholder="B.Indo, MTK"></div>
+                <div class="form-group"><label>Jumat:</label><input type="text" id="jadwal-jumat" placeholder="Olahraga, IPAS"></div>
+                <div class="form-group"><label>Sabtu:</label><input type="text" id="jadwal-sabtu" placeholder="Pramuka"></div>
+                <button onclick="simpanJadwalHarian()" style="background-color: #009688;">Simpan Jadwal</button>
+            </div>
+
+            <div class="subject-card" style="background: #fff; border: 1px solid #ddd; border-left: 4px solid #9c27b0;">
+                <h4 style="color:#9c27b0; margin-top:0;">4. Buat Pengumuman</h4>
+                <div class="form-group">
+                    <textarea id="admin-pengumuman-text" rows="2" placeholder="Ketik info pengumuman..."></textarea>
+                </div>
+                <button onclick="simpanPengumuman()" style="background-color: #9c27b0;">Terbitkan Pengumuman</button>
+            </div>
+
+            <div class="subject-card" style="background: #fff; border: 1px solid #ddd; border-left: 4px solid #2196f3;">
+                <h4 style="color:#2196f3; margin-top:0;">5. Buat Kuis Pilihan Ganda</h4>
+                <div class="form-group">
+                    <label>Mata Pelajaran:</label>
+                    <select id="builder-mapel">
+                        <option>Bahasa Indonesia</option>
+                        <option>Pendidikan Pancasila</option>
+                        <option>Matematika</option>
+                        <option>IPAS</option>
+                        <option>Seni Rupa</option>
+                        <option>Koding Kecerdasan Artifisial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Soal Kuis:</label>
+                    <textarea id="builder-soal" rows="2" placeholder="Teks soal..."></textarea>
+                </div>
+                <input type="text" id="builder-optA" placeholder="Opsi A">
+                <input type="text" id="builder-optB" placeholder="Opsi B">
+                <input type="text" id="builder-optC" placeholder="Opsi C">
+                <input type="text" id="builder-optD" placeholder="Opsi D">
+                <div class="form-group" style="margin-top:8px;">
+                    <label>Kunci Jawaban Benar:</label>
+                    <select id="builder-kunci">
+                        <option value="0">Jawaban A</option>
+                        <option value="1">Jawaban B</option>
+                        <option value="2">Jawaban C</option>
+                        <option value="3">Jawaban D</option>
+                    </select>
+                </div>
+                <button onclick="tambahSoalKeKuis()" style="background-color: #2196f3;">+ Tambah Soal Kuis</button>
+            </div>
+
+            <div class="subject-card" style="background: #fff; border: 1px solid #ddd; border-left: 4px solid #f44336;">
+                <h4 style="color:#f44336; margin-top:0;">6. Reset Data Kuis/Tugas</h4>
+                <button onclick="resetDataKuis()" style="background-color: #f44336; margin-bottom: 8px;">Reset Status Kuis Browser Ini</button>
+                <button onclick="resetKontenGuru()" style="background-color: #ff5722;">Reset Semua Konten Guru</button>
+            </div>
+
+            <div class="subject-card" style="background: #fff; border: 1px solid #ddd; border-left: 4px solid #4CAF50;">
+                <h4 style="color:#2E7D32; margin-top:0;">7. Database Spreadsheet</h4>
+                <a href="https://docs.google.com/spreadsheets/d/1NtNhZjviExtFjleiRsRQhvj1yf4PxSiX1ZrkZsu40Jw/edit" target="_blank" style="text-decoration: none;">
+                    <button style="background-color: #4CAF50;">Buka Google Spreadsheet</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbx6mP4ymLLCUR5rEAQcYzfp2LZleU01hbGUu1AS3e5ctNmusZ5dmX5HNPpqIYBF8rnZ/exec';
+        const subjects = ["Bahasa Indonesia", "Pendidikan Pancasila", "Matematika", "IPAS", "Seni Rupa", "Koding Kecerdasan Artifisial"];
+        
+        const studentPins = {
+            "DESAK PUTU GEBY WIJAYANI": "1001", "FIRLIAN BIMANTARA": "1002", "I GEDE ANGGA SUNIADARMA PUTRA": "1003",
+            "I KETUT ARIK WIDIANA": "1004", "I KOMANG JUNA WIRA SAPUTRA": "1005", "I KOMANG RIZKY ADITYA": "1006",
+            "I KOMANG SACHIO KAMESWARA": "1007", "I MADE AFREEN AGASTYA JULIANDINATHA": "1008", "I PUTU ARTHA WIGUNA": "1009",
+            "I PUTU BAGUS ARYA PRADIPTA": "1010", "I WAYAN DEVANDRA DIKSHAN NALADHIPA": "1011", "KADEK INDRA HADI PUTRA": "1012",
+            "KADEK LAURA AISHWARYA SURYA AGATA": "1013", "I MADE BAGUS SEMARA GUNA": "1014", "KETUT NANDA APRILIANA SAPUTRI": "1015",
+            "KOMANG DITA DAMAYANTI": "1016", "MADE CHANDRA ADI GUNA": "1017", "MARIA FRANSISKA LAPE": "1018",
+            "MUHAMMAD ASBHI ELOK SAPUTRA": "1019", "NABILA DISTA ANGGRAINI": "1020", "NI KADEK KEISYA MAORA PUTRI": "1021",
+            "NI KADEK MASHYA RADINA HAYU": "1022", "NI KETUT KAMANIKA PADMA ISHWARI": "1023", "NI LUH DHEA CALISTA PUTRI": "1024",
+            "NI PUTU KIRANA MAHARANI PUTRI": "1025", "NI PUTU SINTA RADHA VIDYA": "1026", "NI WAYAN TISNA PRAMESTI SWARY": "1027",
+            "PUTU AYU LIDYA DINATA": "1028", "PUTU DESTA ARYASATYA NARENDRA": "1029", "PUTU DIVYA NANDA DWI PUTRI": "1030",
+            "RAMADHAN AZKA MUMTAZ": "1031", "ZAVRINA QIANDRA ALMAHYRA PRAYATA": "1032", "I KOMANG GEDE ANDILAN PRATISTA P.": "1033"
+        };
+
+        let currentUser = "";
+        let currentMapel = "";
+
+        const sampleQuizzes = {
+            "Bahasa Indonesia": [{ q: "Gagasan utama yang menjadi dasar dalam sebuah paragraf disebut...", opt: ["Kalimat penjelas", "Ide pokok", "Judul", "Kesimpulan"], ans: 1 }],
+            "Pendidikan Pancasila": [{ q: "Simbol sila ke-3 Pancasila adalah...", opt: ["Bintang", "Rantai", "Pohon Beringin", "Padi dan Kapas"], ans: 2 }],
+            "Matematika": [{ q: "Hasil dari 1/2 + 1/4 adalah...", opt: ["2/6", "3/4", "2/4", "1/6"], ans: 1 }],
+            "IPAS": [{ q: "Proses pembuatan makanan pada tumbuhan dengan bantuan cahaya matahari disebut...", opt: ["Respirasi", "Fotosintesis", "Evaporasi", "Adaptasi"], ans: 1 }],
+            "Seni Rupa": [{ q: "Warna campuran antara warna merah dan kuning adalah...", opt: ["Hijau", "Jingga/Orange", "Ungu", "Cokelat"], ans: 1 }],
+            "Koding Kecerdasan Artifisial": [{ q: "Proses memecah masalah besar menjadi bagian-bagian kecil dalam Computational Thinking disebut...", opt: ["Algoritma", "Dekomposisi", "Abstraksi", "Pengenalan Pola"], ans: 1 }]
+        };
+
+        function populateSiswaDropdown() {
+            const select = document.getElementById('admin-nilai-siswa-select');
+            select.innerHTML = "";
+            Object.keys(studentPins).forEach(name => {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.innerText = name;
+                select.appendChild(opt);
+            });
+        }
+
+        function switchLogin(element, type) {
+            document.querySelectorAll('.login-section .tab').forEach(t => t.classList.remove('active'));
+            if(element) element.classList.add('active');
+            if(type === 'siswa') {
+                document.getElementById('form-siswa').classList.remove('hidden');
+                document.getElementById('form-guru').classList.add('hidden');
+            } else {
+                document.getElementById('form-siswa').classList.add('hidden');
+                document.getElementById('form-guru').classList.remove('hidden');
+            }
+        }
+
+        function loginSiswa() {
+            const name = document.getElementById('student-name').value;
+            const pin = document.getElementById('student-pin').value.trim();
+            if(!name || !pin) { alert("Lengkapi nama dan PIN kamu!"); return; }
+
+            if(studentPins[name] && studentPins[name] === pin) {
+                currentUser = name;
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('student-dashboard').classList.remove('hidden');
+                document.getElementById('welcome-siswa').innerText = `Halo, ${name}!`;
+                
+                loadServerData();
+                renderSubjects();
+                renderJadwal();
+                renderPengumuman();
+                renderNilaiSumatifSiswa();
+                checkAbsensi();
+                showSection('subject-list');
+            } else {
+                alert("Kode PIN Siswa salah!");
+            }
+        }
+
+        function loginGuru() {
+            const pin = document.getElementById('pin-guru').value;
+            if(pin === '1234') {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('teacher-dashboard').classList.remove('hidden');
+                populateSiswaDropdown();
+                loadJadwalToForm();
+                loadServerData();
+            } else {
+                alert("PIN Rahasia Guru salah!");
+            }
+        }
+
+        function logout() {
+            currentUser = "";
+            document.getElementById('student-dashboard').classList.add('hidden');
+            document.getElementById('teacher-dashboard').classList.add('hidden');
+            document.getElementById('login-section').classList.remove('hidden');
+            document.getElementById('student-name').value = "";
+            document.getElementById('student-pin').value = "";
+            document.getElementById('pin-guru').value = "";
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.main-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function renderSubjects() {
+            const list = document.getElementById('subject-list');
+            list.innerHTML = "";
+            subjects.forEach(sub => {
+                const div = document.createElement('div');
+                div.className = 'subject-card';
+                div.innerHTML = `<h4 style="margin:0 0 4px 0; color:#2196f3;">${sub}</h4><p style="margin:0; font-size:12px; color:#555;">Buka materi, kuis & tugas</p>`;
+                div.onclick = () => openSubject(sub);
+                list.appendChild(div);
+            });
+        }
+
+        function openSubject(sub) {
+            currentMapel = sub;
+            showSection('subject-detail');
+            document.getElementById('detail-title').innerText = sub;
+            renderMateriSiswa();
+            renderTugasSiswa();
+            switchDetailTab(document.querySelectorAll('#subject-detail .tab')[0], 'materi');
+            checkKuisStatus();
+        }
+
+        function backToSubjects() {
+            showSection('subject-list');
+        }
+
+        function switchDetailTab(element, tabId) {
+            document.querySelectorAll('#subject-detail .tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#subject-detail .content-section').forEach(c => c.classList.remove('active'));
+            if(element) element.classList.add('active');
+            document.getElementById(`content-${tabId}`).classList.add('active');
+        }
+
+        function simpanNilaiSumatif() {
+            const siswa = document.getElementById('admin-nilai-siswa-select').value;
+            const jenis = document.getElementById('admin-nilai-jenis').value;
+            const mapel = document.getElementById('admin-nilai-mapel').value;
+            const nilai = document.getElementById('admin-nilai-angka').value;
+
+            if(!nilai) return alert("Masukkan nilai angka!");
+
+            let key = `sumatif_${siswa}`;
+            let dataNilai = JSON.parse(localStorage.getItem(key)) || {};
+            if(!dataNilai[jenis]) dataNilai[jenis] = {};
+            dataNilai[jenis][mapel] = nilai;
+
+            localStorage.setItem(key, JSON.stringify(dataNilai));
+            saveToServer(key, dataNilai);
+            alert(`Nilai ${jenis} untuk ${siswa} berhasil diterbitkan.`);
+            
+            kirimDataKeSpreadsheet(siswa, mapel, `Nilai Sumatif (${jenis})`, nilai);
+            document.getElementById('admin-nilai-angka').value = "";
+        }
+
+        function renderNilaiSumatifSiswa() {
+            const container = document.getElementById('display-nilai-sumatif');
+            const dataNilai = JSON.parse(localStorage.getItem(`sumatif_${currentUser}`)) || {};
+
+            let html = `
+                <table>
+                    <tr>
+                        <th>Mapel</th>
+                        <th>STS-1</th>
+                        <th>SAS-1</th>
+                        <th>STS-2</th>
+                        <th>SAT</th>
+                    </tr>`;
+
+            subjects.forEach(sub => {
+                const sts1 = (dataNilai.STS1 && dataNilai.STS1[sub]) ? dataNilai.STS1[sub] : "-";
+                const sas1 = (dataNilai.SAS1 && dataNilai.SAS1[sub]) ? dataNilai.SAS1[sub] : "-";
+                const sts2 = (dataNilai.STS2 && dataNilai.STS2[sub]) ? dataNilai.STS2[sub] : "-";
+                const sat = (dataNilai.SAT && dataNilai.SAT[sub]) ? dataNilai.SAT[sub] : "-";
+
+                html += `
+                    <tr>
+                        <td><b>${sub}</b></td>
+                        <td>${sts1}</td>
+                        <td>${sas1}</td>
+                        <td>${sts2}</td>
+                        <td>${sat}</td>
+                    </tr>`;
+            });
+
+            html += `</table>`;
+            container.innerHTML = html;
+        }
+
+        function simpanKontenGuru() {
+            const mapel = document.getElementById('admin-mapel').value;
+            const jenis = document.getElementById('admin-jenis').value;
+            const isi = document.getElementById('admin-isi').value;
+            const fileInput = document.getElementById('admin-file-gambar');
+
+            if(!isi.trim() && fileInput.files.length === 0) return alert("Isi materi atau pilih foto!");
+
+            if(fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgData = e.target.result;
+                    const payload = { text: isi, img: imgData };
+                    const key = (jenis === "Materi") ? `custom_materi_${mapel}` : `custom_tugas_${mapel}`;
+                    
+                    localStorage.setItem(key, JSON.stringify(payload));
+                    saveToServer(key, payload);
+
+                    alert(`${jenis} ber-gambar berhasil diterbitkan!`);
+                    kirimDataKeSpreadsheet("GURU", mapel, `Terbit ${jenis}`, isi, imgData, "materi.jpg", "image/jpeg");
+                    document.getElementById('admin-isi').value = "";
+                    fileInput.value = "";
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                const payload = { text: isi, img: null };
+                const key = (jenis === "Materi") ? `custom_materi_${mapel}` : `custom_tugas_${mapel}`;
+                
+                localStorage.setItem(key, JSON.stringify(payload));
+                saveToServer(key, payload);
+
+                alert(`${jenis} berhasil diterbitkan!`);
+                kirimDataKeSpreadsheet("GURU", mapel, `Terbit ${jenis}`, isi);
+                document.getElementById('admin-isi').value = "";
+            }
+        }
+
+        function renderMateriSiswa() {
+            const raw = localStorage.getItem(`custom_materi_${currentMapel}`);
+            const container = document.getElementById('content-materi');
+            if(raw) {
+                let data = JSON.parse(raw);
+                let html = `<div style="background:white; padding:12px; border-radius:6px; line-height:1.5; border-left:4px solid #2196f3;"><h4 style="margin-top:0; color:#2196f3;">Materi Guru:</h4>`;
+                if(data.text) html += `<p style="white-space: pre-line; margin-bottom:8px;">${data.text}</p>`;
+                if(data.img) html += `<img src="${data.img}" class="img-preview" alt="Materi Gambar">`;
+                html += `</div>`;
+                container.innerHTML = html;
+            } else {
+                container.innerHTML = `<p style="font-size:13px; color:#666;">Materi belum diunggah oleh Guru.</p>`;
+            }
+        }
+
+        function renderTugasSiswa() {
+            const raw = localStorage.getItem(`custom_tugas_${currentMapel}`);
+            const container = document.getElementById('content-tugas');
+            let html = "";
+            if(raw) {
+                let data = JSON.parse(raw);
+                html += `<div style="background:#fff3e0; padding:12px; border-radius:6px; margin-bottom:12px; border-left:4px solid #ff9800;"><h4 style="margin-top:0; color:#e65100;">Instruksi Tugas:</h4>`;
+                if(data.text) html += `<p style="white-space: pre-line; margin-bottom:8px;">${data.text}</p>`;
+                if(data.img) html += `<img src="${data.img}" class="img-preview" alt="Instruksi Gambar">`;
+                html += `</div>`;
+            }
+            html += `
+                <div class="form-group">
+                    <label>Jawaban Teks / Ringkasan:</label>
+                    <textarea id="teks-tugas" rows="3" placeholder="Ketik jawaban kamu..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Unggah Foto Tugas (Opsional):</label>
+                    <input type="file" id="file-tugas">
+                </div>
+                <button onclick="uploadTugas()">Kirim Tugas</button>`;
+            container.innerHTML = html;
+        }
+
+        function simpanJadwalHarian() {
+            const jadwalObj = {
+                senin: document.getElementById('jadwal-senin').value.trim() || "Upacara, Bahasa Indonesia, Pendidikan Pancasila",
+                selasa: document.getElementById('jadwal-selasa').value.trim() || "Matematika, IPAS",
+                rabu: document.getElementById('jadwal-rabu').value.trim() || "Seni Rupa, Koding Kecerdasan Artifisial",
+                kamis: document.getElementById('jadwal-kamis').value.trim() || "Bahasa Indonesia, Matematika",
+                jumat: document.getElementById('jadwal-jumat').value.trim() || "Olahraga, IPAS",
+                sabtu: document.getElementById('jadwal-sabtu').value.trim() || "Pramuka, Ekstrakurikuler"
+            };
+
+            localStorage.setItem("custom_jadwal_harian", JSON.stringify(jadwalObj));
+            saveToServer("custom_jadwal_harian", jadwalObj);
+            alert("Jadwal pelajaran diperbarui!");
+            kirimDataKeSpreadsheet("GURU", "Sistem", "Update Jadwal", JSON.stringify(jadwalObj));
+        }
+
+        function loadJadwalToForm() {
+            const savedJadwal = JSON.parse(localStorage.getItem("custom_jadwal_harian"));
+            if(savedJadwal) {
+                document.getElementById('jadwal-senin').value = savedJadwal.senin || "";
+                document.getElementById('jadwal-selasa').value = savedJadwal.selasa || "";
+                document.getElementById('jadwal-rabu').value = savedJadwal.rabu || "";
+                document.getElementById('jadwal-kamis').value = savedJadwal.kamis || "";
+                document.getElementById('jadwal-jumat').value = savedJadwal.jumat || "";
+                document.getElementById('jadwal-sabtu').value = savedJadwal.sabtu || "";
+            }
+        }
+
+        function renderJadwal() {
+            const savedJadwal = JSON.parse(localStorage.getItem("custom_jadwal_harian"));
+            const j = savedJadwal || {
+                senin: "Upacara, Bahasa Indonesia, Pendidikan Pancasila",
+                selasa: "Matematika, IPAS",
+                rabu: "Seni Rupa, Koding Kecerdasan Artifisial",
+                kamis: "Bahasa Indonesia, Matematika",
+                jumat: "Olahraga, IPAS",
+                sabtu: "Pramuka, Ekstrakurikuler"
+            };
+
+            document.getElementById('display-jadwal').innerHTML = `
+                <table>
+                    <tr><th>Hari</th><th>Mata Pelajaran</th></tr>
+                    <tr><td><b>Senin</b></td><td>${j.senin}</td></tr>
+                    <tr><td><b>Selasa</b></td><td>${j.selasa}</td></tr>
+                    <tr><td><b>Rabu</b></td><td>${j.rabu}</td></tr>
+                    <tr><td><b>Kamis</b></td><td>${j.kamis}</td></tr>
+                    <tr><td><b>Jumat</b></td><td>${j.jumat}</td></tr>
+                    <tr><td><b>Sabtu</b></td><td>${j.sabtu}</td></tr>
+                </table>`;
+        }
+
+        function checkAbsensi() {
+            const today = new Date().toISOString().slice(0, 10);
+            const status = localStorage.getItem(`absen_${currentUser}_${today}`);
+            const textEl = document.getElementById('absensi-status-text');
+            const btnEl = document.getElementById('btn-isi-absen');
+
+            if(status) {
+                textEl.innerHTML = `<strong style="color:#2e7d32;">Terima kasih! Kamu sudah mengisi absensi hari ini jam ${status}.</strong>`;
+                btnEl.style.display = "none";
+            } else {
+                textEl.innerText = "Klik tombol di bawah untuk mengisi kehadiran hari ini:";
+                btnEl.style.display = "inline-block";
+            }
+        }
+
+        function kirimAbsensi() {
+            const today = new Date().toISOString().slice(0, 10);
+            const time = new Date().toLocaleTimeString();
+            localStorage.setItem(`absen_${currentUser}_${today}`, time);
+            
+            alert("Absensi berhasil dicatat!");
+            kirimDataKeSpreadsheet(currentUser, "Absensi Harian", "Kehadiran", "Hadir");
+            checkAbsensi();
+        }
+
+        function renderPengumuman() {
+            const customPengumuman = localStorage.getItem("custom_pengumuman");
+            const el = document.getElementById('display-pengumuman');
+            if(customPengumuman) {
+                el.innerHTML = `<div style="background:#f3e5f5; padding:12px; border-radius:6px; border-left:4px solid #9c27b0;"><p style="white-space: pre-line; margin:0; font-size:14px;">${customPengumuman}</p></div>`;
+            } else {
+                el.innerHTML = "<p style='font-size:13px; color:#666;'>Belum ada pengumuman terbaru.</p>";
+            }
+        }
+
+        function simpanPengumuman() {
+            const text = document.getElementById('admin-pengumuman-text').value.trim();
+            if(!text) return alert("Isi pengumuman!");
+            localStorage.setItem("custom_pengumuman", text);
+            saveToServer("custom_pengumuman", text);
+            alert("Pengumuman diterbitkan!");
+            kirimDataKeSpreadsheet("GURU", "Pengumuman", "Terbit Pengumuman", text);
+        }
+
+        function tambahSoalKeKuis() {
+            const mapel = document.getElementById('builder-mapel').value;
+            const soal = document.getElementById('builder-soal').value.trim();
+            const optA = document.getElementById('builder-optA').value.trim();
+            const optB = document.getElementById('builder-optB').value.trim();
+            const optC = document.getElementById('builder-optC').value.trim();
+            const optD = document.getElementById('builder-optD').value.trim();
+            const kunci = parseInt(document.getElementById('builder-kunci').value);
+
+            if(!soal || !optA || !optB || !optC || !optD) return alert("Lengkapi soal dan semua pilihan!");
+
+            let existingQuiz = JSON.parse(localStorage.getItem(`custom_pg_quiz_${mapel}`)) || [];
+            existingQuiz.push({ q: soal, opt: [optA, optB, optC, optD], ans: kunci });
+            localStorage.setItem(`custom_pg_quiz_${mapel}`, JSON.stringify(existingQuiz));
+            saveToServer(`custom_pg_quiz_${mapel}`, existingQuiz);
+
+            alert(`Soal ditambahkan ke Kuis ${mapel}. Total: ${existingQuiz.length}`);
+            kirimDataKeSpreadsheet("GURU", mapel, "Terbit Kuis", JSON.stringify(existingQuiz));
+            document.getElementById('builder-soal').value = "";
+            document.getElementById('builder-optA').value = "";
+            document.getElementById('builder-optB').value = "";
+            document.getElementById('builder-optC').value = "";
+            document.getElementById('builder-optD').value = "";
+        }
+
+        function uploadTugas() {
+            const teksInput = document.getElementById('teks-tugas').value.trim();
+            const fileInput = document.getElementById('file-tugas');
+
+            if(!teksInput && fileInput.files.length === 0) return alert("Isi jawaban teks atau pilih file!");
+
+            if(fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64 = e.target.result;
+                    alert(`Tugas sedang dikirim ke Spreadsheet Guru...`);
+                    kirimDataKeSpreadsheet(currentUser, currentMapel, 'Tugas', teksInput || 'File Tugas Dikirim', base64, file.name, file.type);
+                    document.getElementById('teks-tugas').value = "";
+                    fileInput.value = "";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert(`Jawaban teks berhasil dikirim!`);
+                kirimDataKeSpreadsheet(currentUser, currentMapel, 'Tugas Teks', teksInput);
+                document.getElementById('teks-tugas').value = "";
+            }
+        }
+
+        function checkKuisStatus() {
+            const kuisContainer = document.getElementById('kuis-container');
+            const savedNilai = localStorage.getItem(`kuis_${currentUser}_${currentMapel}`);
+            
+            if(savedNilai !== null) {
+                kuisContainer.innerHTML = `
+                    <div style="background:#e8f5e9; padding:15px; border-radius:6px; border:1px solid #4CAF50; text-align:center;">
+                        <h4 style="color:#2e7d32; margin-top:0;">Sudah Dikerjakan</h4>
+                        <p style="font-size:16px; margin:5px 0;">Nilai Kamu: <strong style="font-size:24px; color:#1b5e20;">${savedNilai}</strong></p>
+                    </div>`;
+            } else {
+                renderSoalKuis();
+            }
+        }
+
+        function renderSoalKuis() {
+            const kuisContainer = document.getElementById('kuis-container');
+            const customQuizJSON = localStorage.getItem(`custom_pg_quiz_${currentMapel}`);
+            let questions = customQuizJSON ? JSON.parse(customQuizJSON) : (sampleQuizzes[currentMapel] || sampleQuizzes["Bahasa Indonesia"]);
+
+            let html = `<p style="color:#d32f2f; font-weight:bold; font-size:12px;">Perhatian: Kuis hanya bisa dikerjakan 1 kali!</p><form id="quiz-form">`;
+            
+            questions.forEach((item, index) => {
+                html += `
+                    <div class="question-box">
+                        <p style="font-weight:bold; margin-top:0; font-size:14px;">${index + 1}. ${item.q}</p>`;
+                item.opt.forEach((option, optIdx) => {
+                    html += `
+                        <label class="option-label">
+                            <input type="radio" name="q${index}" value="${optIdx}"> ${String.fromCharCode(65 + optIdx)}. ${option}
+                        </label>`;
+                });
+                html += `</div>`;
+            });
+
+            html += `<button type="button" onclick="submitKuis()" style="background-color:#2196f3; padding:12px;">Kirim Jawaban Kuis</button></form>`;
+            kuisContainer.innerHTML = html;
+        }
+
+        function submitKuis() {
+            const customQuizJSON = localStorage.getItem(`custom_pg_quiz_${currentMapel}`);
+            let questions = customQuizJSON ? JSON.parse(customQuizJSON) : (sampleQuizzes[currentMapel] || sampleQuizzes["Bahasa Indonesia"]);
+            
+            let correctCount = 0;
+            let answeredAll = true;
+
+            questions.forEach((item, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if(!selected) {
+                    answeredAll = false;
+                } else if(parseInt(selected.value) === item.ans) {
+                    correctCount++;
+                }
+            });
+
+            if(!answeredAll) return alert("Harap jawab semua soal terlebih dahulu!");
+
+            const nilai = Math.round((correctCount / questions.length) * 100);
+            localStorage.setItem(`kuis_${currentUser}_${currentMapel}`, nilai);
+            
+            alert(`Kuis selesai! Nilai Kamu: ${nilai}`);
+            kirimDataKeSpreadsheet(currentUser, currentMapel, 'Kuis PG', nilai);
+            checkKuisStatus();
+        }
+
+        function resetDataKuis() {
+            localStorage.clear();
+            alert("Status kuis dan absensi di browser ini telah dibersihkan!");
+        }
+
+        function resetKontenGuru() {
+            if(confirm("Hapus semua kuis, materi, dan pengumuman buatan guru?")) {
+                subjects.forEach(sub => {
+                    localStorage.removeItem(`custom_materi_${sub}`);
+                    localStorage.removeItem(`custom_tugas_${sub}`);
+                    localStorage.removeItem(`custom_pg_quiz_${sub}`);
+                });
+                localStorage.removeItem("custom_pengumuman");
+                localStorage.removeItem("custom_jadwal_harian");
+                alert("Semua konten buatan guru telah dibersihkan.");
+            }
+        }
+
+        function saveToServer(key, value) {
+            fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: "saveGuruContent", key: key, value: value })
+            })
+            .then(res => res.json())
+            .then(data => console.log("Konten tersimpan di server:", data))
+            .catch(err => console.error("Gagal simpan ke server:", err));
+        }
+
+        function loadServerData() {
+            fetch(GAS_URL)
+            .then(res => res.json())
+            .then(data => {
+                if(data && typeof data === 'object') {
+                    Object.keys(data).forEach(key => {
+                        localStorage.setItem(key, typeof data[key] === 'object' ? JSON.stringify(data[key]) : data[key]);
+                    });
+                    if(currentMapel) {
+                        renderMateriSiswa();
+                        renderTugasSiswa();
+                    }
+                    renderJadwal();
+                    renderPengumuman();
+                    if(currentUser) renderNilaiSumatifSiswa();
+                }
+            })
+            .catch(err => console.error("Gagal memuat data server:", err));
+        }
+
+        function kirimDataKeSpreadsheet(nama, mapel, jenis, nilai, fileBase64 = null, fileName = null, fileMimeType = null) {
+            const payload = { namaSiswa: nama, mapel: mapel, jenis: jenis, nilai: nilai, fileBase64: fileBase64, fileName: fileName, fileMimeType: fileMimeType };
+            fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => console.log("Berhasil terhubung:", data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
